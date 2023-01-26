@@ -1,0 +1,17 @@
+import os
+import shutil
+from PIL import Image
+
+root_dir = 'Path'
+destination_folder = 'Path'
+
+for subdir, dirs, files in os.walk(root_dir):
+    for file in files:
+        if file.endswith('.png'):
+            file_path = os.path.join(subdir, file)
+            try:
+                img = Image.open(file_path)
+                img.verify()
+                shutil.move(file_path, destination_folder) # Move the files in the destination folder
+            except (IOError, SyntaxError):
+                pass #Check for corrupted files
